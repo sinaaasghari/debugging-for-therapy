@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spy Game</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Vazirmatn:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Language Selection -->
+  <div id="language-selection" class="screen animate__animated animate__fadeIn">
+    <div class="logo-container">
+      <div class="logo">🕵️</div>
+      <h1 id="welcome-title">Welcome to Spy Game</h1>
+      <h1 id="welcome-title-fa">به بازی جاسوس خوش آمدید</h1>
+    </div>
+    <div class="language-buttons">
+      <button id="english-btn" class="btn-primary">English</button>
+      <button id="persian-btn" class="btn-primary">فارسی</button>
+    </div>
+    <div class="credits">
+      <p>A Social Deduction Game</p>
+    </div>
+  </div>
+
+  <!-- Game Setup -->
+  <div id="game-setup" class="screen hidden animate__animated">
+    <h1 id="setup-title">Game Setup</h1>
+    <div class="setup-container">
+      <div class="player-input">
+        <label for="player-name" id="name-label">Your Name:</label>
+        <input type="text" id="player-name" class="input-field">
+      </div>
+      <div class="game-options">
+        <button id="create-game-btn" class="btn-primary">Create New Game</button>
+        <div class="separator"><span>OR</span></div>
+        <div class="join-game">
+          <input type="text" id="game-id-input" class="input-field" placeholder="Game ID">
+          <button id="join-game-btn" class="btn-secondary">Join Game</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lobby -->
+  <div id="lobby" class="screen hidden animate__animated">
+    <h1 id="lobby-title">Game Lobby</h1>
+    <div class="lobby-container">
+      <div class="game-info">
+        <div class="game-id-card">
+          <h3 id="game-id-label">Game ID</h3>
+          <div id="game-id" class="game-id-value"></div>
+          <button id="copy-id-btn" class="btn-icon">📋</button>
+        </div>
+      </div>
+      
+      <div class="game-settings">
+        <h3 id="settings-title">Game Settings</h3>
+        <div class="setting-item">
+          <label id="spies-label" for="num-spies">Number of Spies:</label>
+          <div class="number-input">
+            <button id="decrease-spies" class="btn-icon">-</button>
+            <input type="number" id="num-spies" min="1" max="3" value="1" readonly>
+            <button id="increase-spies" class="btn-icon">+</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="players-list-container">
+        <h3 id="players-title">Players</h3>
+        <div class="players-list">
+          <ul id="players"></ul>
+        </div>
+      </div>
+      
+      <button id="start-game-btn" class="btn-primary btn-large">Start Game</button>
+    </div>
+  </div>
+
+  <!-- Game Play -->
+  <div id="game-play" class="screen hidden animate__animated">
+    <div class="game-header">
+      <h2 id="game-status"></h2>
+      <div class="timer-container">
+        <div id="timer-label"></div>
+        <div class="timer-visual">
+          <div id="timer-progress"></div>
+        </div>
+        <div id="timer"></div>
+      </div>
+    </div>
+
+    <div class="player-card">
+      <div class="role-icon" id="role-icon">🎭</div>
+      <h3 id="your-role"></h3>
+      <p id="location"></p>
+    </div>
+
+    <div class="game-controls">
+      <div id="turn-indicator" class="turn-indicator"></div>
+      <button id="next-turn-btn" class="btn-primary">End My Turn</button>
+    </div>
+
+    <div class="all-players-container">
+      <h3 id="players-list-title">Players</h3>
+      <div class="all-players">
+        <ul id="game-players"></ul>
+      </div>
+    </div>
+
+    <div id="spy-controls" class="hidden spy-controls-container">
+      <h3 id="guess-prompt">Guess the location:</h3>
+      <div class="location-select-container">
+        <select id="location-guess" class="location-select"></select>
+        <button id="make-guess-btn" class="btn-danger">Make Guess</button>
+      </div>
+    </div>
+
+    <div id="accusation-controls">
+      <button id="accuse-btn" class="btn-warning">Accuse Someone</button>
+    </div>
+
+    <div id="voting-section" class="hidden">
+      <h3 id="voting-title">Voting</h3>
+      <p id="accusation-text" class="accusation-text"></p>
+      <div class="vote-buttons">
+        <button id="vote-yes" class="btn-success">YES</button>
+        <button id="vote-no" class="btn-danger">NO</button>
+      </div>
+      <div id="voting-results" class="voting-results"></div>
+    </div>
+  </div>
+
+  <!-- Game End -->
+  <div id="game-end" class="screen hidden animate__animated">
+    <div class="result-container">
+      <h1 id="end-title">Game Over</h1>
+      <div id="result" class="result-box"></div>
+      <div class="spies-reveal" id="spies-reveal"></div>
+      <div class="location-reveal">
+        <div id="location-icon">📍</div>
+        <div id="location-reveal"></div>
+      </div>
+      <button id="new-game-btn" class="btn-primary btn-large">Play Again</button>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="scripts.js"></script>
+</body>
+</html>
